@@ -1,0 +1,11 @@
+Stephen Ramirez
+Int:10
+Agi:10
+Wiz:10
+Str:10
+====
+Class:Dragonborn Wizard
+====
+This is a test character
+========
+================

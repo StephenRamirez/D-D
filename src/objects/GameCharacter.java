@@ -6,14 +6,14 @@ import java.util.Hashtable;
  * This class represents the D&D character
  * It has a name, bio, and an infinite amount of stats and info
  */
-public class Character {
+public class GameCharacter {
 	
 	private String name, bio;
 	private int health;
 	private Hashtable<String, String> stats; //this represents infinite amount of stats
 	private Hashtable<String, String> info; //this represents infinite amount of info
 	
-	public Character(String name)
+	public GameCharacter(String name)
 	{
 		this.name = name;
 		this.health = 0;
