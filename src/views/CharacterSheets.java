@@ -26,12 +26,17 @@ public class CharacterSheets extends JPanel implements Observer
 	public CharacterSheets(World game)
 	{
 		this.game = game;
+		this.setCharacter(null);
 		this.setUpPage();
 	}
 	
 	private void setCharacter(String person)
 	{
-		currentScope = game.getCharacter(person);
+		if(person == null)
+			currentScope = game.getCharacters().get(0);
+		else
+			currentScope = game.getCharacter(person);
+		
 		pageStats = currentScope.getStats();
 		pageInfo = currentScope.getInfo();
 	}
@@ -105,7 +110,8 @@ public class CharacterSheets extends JPanel implements Observer
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			
+			String text = ((JComboBox) e.getSource()).getName();
+			System.out.println(text);
 		}
 		
 	}

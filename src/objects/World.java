@@ -21,7 +21,7 @@ public class World extends Observable{
 		BufferedReader input = new BufferedReader(log);
 		String line;
 		
-		while(!(line = input.readLine()).equals("================"))
+		while((line = input.readLine()) != null)
 		{
 			GameCharacter temp = new GameCharacter(line);
 			while(!(line = input.readLine()).equals("===="))
@@ -36,9 +36,12 @@ public class World extends Observable{
 				temp.setInfo(info[0], info[1]);
 			}
 			
-			line = input.readLine();
+			line = input.readLine();			
 			temp.setBio(line);
 			temp.setHealth(100);
+			
+			//this is to read the last dividing line between characters
+			line = input.readLine();
 			
 			characters.add(temp);
 		}

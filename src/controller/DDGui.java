@@ -2,6 +2,7 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -10,31 +11,36 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
+import objects.World;
+import views.CharacterSheets;
+
 public class DDGui extends JFrame{
 	
 	private JPanel currentView;
 	
 	//here is where you would declare your JPanel classes
 	
-	//private CharacterSheets characterSheets();
+	private CharacterSheets characterSheets;
+	private World game;
 	
-	public static void main(String[] args)
+	public static void main(String[] args) throws IOException
 	{
 		DDGui application = new DDGui();
 		application.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		application.setVisible(true);
 	}
 	
-	public DDGui()
+	public DDGui() throws IOException
 	{
 		this.setTitle("This is the D&D title!");
 		this.setUpMenu();
 
-		/*
-		characterSheets = new CharacterSheets();
+		game = new World();
+		game.loadCharacters();
+		
+		characterSheets = new CharacterSheets(game);
 		
 		this.setView(characterSheets);
-		*/
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
