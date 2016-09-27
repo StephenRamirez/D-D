@@ -27,7 +27,6 @@ public class CharacterSheets extends JPanel implements Observer
 	{
 		this.game = game;
 		this.setCharacter(null);
-		this.setUpPage();
 	}
 	
 	private void setCharacter(String person)
@@ -39,47 +38,34 @@ public class CharacterSheets extends JPanel implements Observer
 		
 		pageStats = currentScope.getStats();
 		pageInfo = currentScope.getInfo();
+		
+		this.setUpPage();
 	}
 	
 	private void setUpPage()
 	{
-		this.setUpStats();
-		this.setUpInfo();
+		this.setUpData(1000, 0, pageStats);
+		this.setUpData(0, 0, pageInfo);
+		//this.setUpStats();
+		//this.setUpInfo();
 		this.setUpComboMenu();
 	}
 	
-	private void setUpStats()
+	private void setUpData(int x, int y, Hashtable<String, String> data)
 	{
-		JPanel statPanel = new JPanel();
-		statPanel.setLayout(new GridLayout(0,2));
-		statPanel.setSize(500, this.getHeight());
-		statPanel.setLocation(1000, 0);
+		JPanel dataPanel = new JPanel();
+		dataPanel.setLayout(new GridLayout(0,2));
+		dataPanel.setSize(500, this.getHeight());
+		dataPanel.setLocation(1000, 0);
 		
-		Set<String> list = pageStats.keySet();
+		Set<String> list = data.keySet();
 		for(String keys : list)
 		{
-			statPanel.add(new JLabel(keys +":"));
-			statPanel.add(new JLabel(pageStats.get(keys)));
+			dataPanel.add(new JLabel(keys +":"));
+			dataPanel.add(new JLabel(data.get(keys)));
 		}
 		
-		this.add(statPanel);
-	}
-	
-	private void setUpInfo()
-	{
-		JPanel infoPanel = new JPanel();
-		infoPanel.setLayout(new GridLayout(0,2));
-		infoPanel.setSize(500, this.getHeight());
-		infoPanel.setLocation(0, 0);
-		
-		Set<String> list = pageInfo.keySet();
-		for(String keys : list)
-		{
-			infoPanel.add(new JLabel(keys +":"));
-			infoPanel.add(new JLabel(pageInfo.get(keys)));
-		}
-		
-		this.add(infoPanel);
+		this.add(dataPanel);
 	}
 	
 	private void setUpComboMenu()
@@ -110,8 +96,12 @@ public class CharacterSheets extends JPanel implements Observer
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			String text = ((JComboBox) e.getSource()).getName();
-			System.out.println(text);
+			JComboBox selected = (JComboBox)e.getSource();
+			String text = (String)selected.getSelectedItem();
+			removeAll();
+			setCharacter(text);
+			repaint();
+			validate();
 		}
 		
 	}
